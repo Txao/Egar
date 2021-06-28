@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Math</title>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        let usernameFromSecurity = /*[[${#httpServletRequest.getRemoteUser()}]]*/ 'Sebastian';
+
+        let arr = /*[[${questions}]]*/ 'Sebastian';
+        let rButtonsName = [];
+        let rButtonsByName = [];
+        let usersAnswers = [];
+
+        for (let i = 0; i < arr.length; i++) {
+            rButtonsName.push(arr[i].id);
+            rButtonsByName.push(document.getElementsByName(rButtonsName[i]));
+        }
+
+        function isCheck() {
+            let temp = [];
+
+            for (let i = 0; i < rButtonsByName.length; i++) {
+                for (let j = 0; j < 4; j++) {
+                    if (rButtonsByName[i][j].checked) {
+                        temp.push(rButtonsByName[i][j].value);
+                        usersAnswers = temp;
+                        document.getElementById('inp123').value = usersAnswers;
+                    }
+                }
+            }
+
+            document.getElementById('inpUsername').value = usernameFromSecurity;
+        }
+
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+
+<div th:each="question : ${questions}">
+    <p th:text="${question.getQuestion()}"></p>
+    <p><input th:name="${question.getId()}" type="radio" th:text="${question.getAnswer()}" th:value="${question.getAnswer()}"></p>
+    <p><input th:name="${question.getId()}" type="radio" th:text="${question.getWAnswer1()}" th:value="${question.getWAnswer1()}"></p>
+    <p><input th:name="${question.getId()}" type="radio" th:text="${question.getWAnswer2()}" th:value="${question.getWAnswer2()}"></p>
+    <p><input th:name="${question.getId()}" type="radio" th:text="${question.getWAnswer3()}" th:value="${question.getWAnswer3()}"></p>
+    <br/><br/><br/>
+</div>
+
+
+<form th:method="POST" th:action="@{/test/math}">
+
+    <input type="hidden" id="inp123" name="answers">
+    <input type="hidden" id="inpUsername" name="username">
+
+    <input type="submit" onclick="isCheck()" value="Finish">
+</form>
+
+</body>
+</html>

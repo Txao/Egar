@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            background-color: rgb(36, 32, 32);
+        }
+
+        h1 {
+            font-size: 400%;
+            padding-top: 8%;
+            text-align: center;
+            color: white;
+            font-family: 'Megrim', cursive;
+        }
+
+        h3 {
+            font-size: 180%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            text-align: center;
+            color: white;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        INPUT[type="text"] {
+            background-color: rgb(36, 32, 32);
+            color: #ffe;
+
+            width: 10%;
+            padding: 5px 5px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 3px solid #555;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+
+
+        input[type=text]:focus {
+            border: 3px solid #ccc;
+        }
+
+        INPUT[type="password"] {
+            background-color: rgb(36, 32, 32);
+            color: #ffe;
+
+            width: 10%;
+            padding: 5px 5px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 3px solid #555;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+
+        input[type=password]:focus {
+            border: 3px solid #ccc;
+        }
+
+        select {
+            background-color: rgb(36, 32, 32);
+            color: #FFF;
+
+            width: 10%;
+            padding: 5px 5px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 3px solid #555;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+
+        select:focus {
+            border: 3px solid #ccc;
+        }
+
+        .button {
+            text-align: center;
+
+        }
+
+        .testtype {
+            text-align: center;
+            padding-bottom: 1.5%;
+        }
+
+        .logoutButton {
+            padding-top: 1%;
+            padding-right: 1%;
+            text-align: right;
+        }
+
+        .buttonClickLogOut {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 150%;
+            font-weight: 800;
+            color: #FFF;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            border: white;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+            transition-duration: 0.4s;
+            width: 9.8%;
+            height: 45px;
+        }
+
+        .buttonClickLogOut:hover {
+            background-color: #FFF;
+            color: #000;
+        }
+
+        .buttonclick {
+            font-family: 'Megrim', cursive;
+            font-size: 150%;
+            font-weight: 800;
+            color: #FFF;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            border: white;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+            transition-duration: 0.4s;
+            width: 9.8%;
+            height: 30px;
+        }
+
+        .buttonclick:hover {
+            background-color: #FFF;
+            color: #000;
+        }
+
+    </style>
+
+    <script>
+
+        function getSelectedTest() {
+            let selectedTest = getComboA(document.getElementById("comboA"));
+        }
+
+        function getComboA(selectObject) {
+            let selectedTest = selectObject.value.toLowerCase();
+            document.getElementById("testForm").action = "/test/" + selectedTest;
+        }
+
+    </script>
+
+</head>
+
+<body onload="getSelectedTest()">
+
+<div class="logoutButton">
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" class="buttonClickLogOut" value="Logout"/>
+    </form>
+</div>
+
+<!-- ///////////////////////////// -->
+
+<h1>TestHub</h1>
+
+<div>
+    <h3 th:inline="text">Welcome, [[${#httpServletRequest.getRemoteUser()}]]! Let's take a test!</h3>
+</div>
+
+<div class="testtype">
+    <select id="comboA" onchange="getComboA(this)">
+        <div th:each="test : ${tests}">
+            <option th:text="${test.getTestName()}" th:value="${test.getTestName()}">Type</option>
+        </div>
+    </select>
+</div>
+
+<form id="testForm" method="GET">
+<div class="button">
+    <input type="submit" class="buttonclick" value="GO!">
+</div>
+</form>
+
+</body>
+</html>

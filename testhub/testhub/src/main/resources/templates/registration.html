@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            background-color: rgb(36, 32, 32);
+        }
+
+        h1 {
+            font-size: 400%;
+            padding-top: 8%;
+            padding-bottom: 0%;
+            text-align: center;
+            color: white;
+            font-family: 'Megrim', cursive;
+        }
+
+        h3 {
+            font-size: 180%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+            text-align: center;
+            color: white;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .username {
+            text-align: center;
+        }
+
+        .password {
+            text-align: center;
+            padding-bottom: 1%;
+        }
+
+        .button {
+            text-align: center;
+
+        }
+
+        INPUT[type="text"] {
+            background-color: rgb(36, 32, 32);
+            color: #ffe;
+
+            width: 10%;
+            padding: 5px 5px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 3px solid #555;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+
+
+        input[type=text]:focus {
+            border: 3px solid #ccc;
+        }
+
+        input[type="password"] {
+            background-color: rgb(36, 32, 32);
+            color: #ffe;
+
+            width: 10%;
+            padding: 5px 5px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 3px solid #555;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+
+        input[type="password"]:focus{
+            border: 3px solid #ccc;
+            outline:0;
+        }
+
+        .buttonclick {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 150%;
+            font-weight: 800;
+            color: #FFF;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            border: white;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+            transition-duration: 0.4s;
+            width: 9.8%;
+            height: 45px;
+        }
+
+        .buttonclick:hover {
+            background-color: #FFF;
+            color: #000;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>Registration</h1>
+
+<form action="/registration" method="post">
+    <div class="username"><input type="text" placeholder="Name" name="name"/></div>
+    <div class="username"><input type="text" placeholder="Username" name="username"/></div>
+    <div class="password"><input type="password" placeholder="Password" name="password"/></div>
+    <div class="button"><input type="submit" class="buttonclick" value="Sign Up"/></div>
+</form>
+
+<h3>Already have an account? <a href="/login">Sign In</a></h3>
+
+</body>
+</html>
